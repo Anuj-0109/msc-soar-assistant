@@ -1,0 +1,76 @@
+version: "3.1"
+
+intents:
+  - greet
+  - analyze_threat
+  - block_threat
+  - generate_report
+  - unblock_threat
+  - show_latest_report
+  - check_ip_reputation
+  - analyze_log_file
+  - approve_block_ip
+
+entities:
+  - ip
+  - domain
+  - file_hash
+  - ip_address
+  - log_path
+
+slots:
+  ip:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: ip
+  domain:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: domain
+  file_hash:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: file_hash
+
+  ip_address:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: ip_address
+
+  log_path:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: log_path
+
+
+actions:
+  - action_analyze_threat
+  - action_block_threat
+  - action_generate_report
+  - action_unblock_threat
+  - action_show_latest_report
+  - action_parse_and_analyze_log
+  - action_query_threat_intel
+  - action_enforce_firewall_rule
+
+responses:
+  utter_greet:
+    - text: "Hello Analyst. Security assistant online. Ready to triage network or file indicators."
+  utter_processing:
+    - text: "Acknowledged. Querying external threat intelligence databases for reputation data..."
+  utter_blocking:
+    - text: "Executing incident containment protocol. Updating active security access lists."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

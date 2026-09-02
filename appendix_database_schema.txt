@@ -1,0 +1,205 @@
+
+====================================================================================================
+DATABASE: soar_platform.db
+====================================================================================================
+
+TABLE: comments
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  incident_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  author                    TEXT            NOT_NULL=True PK=False DEFAULT=None
+  comment_text              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+FOREIGN KEYS:
+  incident_id -> incidents.id
+
+TABLE: incidents
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  title                     TEXT            NOT_NULL=True PK=False DEFAULT=None
+  description               TEXT            NOT_NULL=False PK=False DEFAULT=None
+  ioc_value                 TEXT            NOT_NULL=False PK=False DEFAULT=None
+  ioc_type                  TEXT            NOT_NULL=False PK=False DEFAULT=None
+  severity                  TEXT            NOT_NULL=False PK=False DEFAULT=None
+  risk_score                INTEGER         NOT_NULL=False PK=False DEFAULT=0
+  status                    TEXT            NOT_NULL=False PK=False DEFAULT='OPEN'
+  assigned_analyst          TEXT            NOT_NULL=False PK=False DEFAULT='UNASSIGNED'
+  mitre_tactic              TEXT            NOT_NULL=False PK=False DEFAULT='N/A'
+  mitre_technique           TEXT            NOT_NULL=False PK=False DEFAULT='N/A'
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+  updated_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+TABLE: playbook_executions
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  playbook_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  incident_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  executed_at               TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+  status                    TEXT            NOT_NULL=False PK=False DEFAULT=None
+  output_log                TEXT            NOT_NULL=False PK=False DEFAULT=None
+  requested_by              TEXT            NOT_NULL=False PK=False DEFAULT='ANALYST'
+  execution_mode            TEXT            NOT_NULL=False PK=False DEFAULT='SIMULATION'
+  approval_status           TEXT            NOT_NULL=False PK=False DEFAULT='PENDING'
+  approved_by               TEXT            NOT_NULL=False PK=False DEFAULT=None
+  approved_at               TEXT            NOT_NULL=False PK=False DEFAULT=None
+  started_at                TEXT            NOT_NULL=False PK=False DEFAULT=None
+  completed_at              TEXT            NOT_NULL=False PK=False DEFAULT=None
+  step_results_json         TEXT            NOT_NULL=False PK=False DEFAULT='[]'
+  risk_score                INTEGER         NOT_NULL=False PK=False DEFAULT=0
+  severity                  TEXT            NOT_NULL=False PK=False DEFAULT='LOW'
+  containment_requested     INTEGER         NOT_NULL=False PK=False DEFAULT=0
+  containment_status        TEXT            NOT_NULL=False PK=False DEFAULT='NOT_REQUESTED'
+FOREIGN KEYS:
+  incident_id -> incidents.id
+  playbook_id -> playbooks.id
+
+TABLE: playbooks
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  name                      TEXT            NOT_NULL=True PK=False DEFAULT=None
+  trigger_condition         TEXT            NOT_NULL=True PK=False DEFAULT=None
+  action_type               TEXT            NOT_NULL=True PK=False DEFAULT=None
+  enabled                   INTEGER         NOT_NULL=False PK=False DEFAULT=1
+  description               TEXT            NOT_NULL=False PK=False DEFAULT=''
+  workflow_json             TEXT            NOT_NULL=False PK=False DEFAULT='[]'
+  requires_approval         INTEGER         NOT_NULL=False PK=False DEFAULT=1
+  created_at                TEXT            NOT_NULL=False PK=False DEFAULT=None
+  updated_at                TEXT            NOT_NULL=False PK=False DEFAULT=None
+
+TABLE: timeline_events
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  incident_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  action_by                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  action_description        TEXT            NOT_NULL=True PK=False DEFAULT=None
+  timestamp                 TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+FOREIGN KEYS:
+  incident_id -> incidents.id
+
+TABLE: users
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  username                  TEXT            NOT_NULL=True PK=False DEFAULT=None
+  password_hash             TEXT            NOT_NULL=True PK=False DEFAULT=None
+  role                      TEXT            NOT_NULL=False PK=False DEFAULT='analyst'
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+====================================================================================================
+DATABASE: soar_audit.db
+====================================================================================================
+
+TABLE: audit_logs
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  timestamp                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  action_type               TEXT            NOT_NULL=True PK=False DEFAULT=None
+  target_ip                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  risk_level                TEXT            NOT_NULL=True PK=False DEFAULT=None
+  analyst_notes             TEXT            NOT_NULL=True PK=False DEFAULT=None
+  status                    TEXT            NOT_NULL=True PK=False DEFAULT=None
+
+TABLE: comments
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  incident_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  author                    TEXT            NOT_NULL=True PK=False DEFAULT=None
+  comment_text              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+FOREIGN KEYS:
+  incident_id -> incidents.id
+
+TABLE: incidents
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  title                     TEXT            NOT_NULL=True PK=False DEFAULT=None
+  description               TEXT            NOT_NULL=False PK=False DEFAULT=None
+  ioc_value                 TEXT            NOT_NULL=False PK=False DEFAULT=None
+  ioc_type                  TEXT            NOT_NULL=False PK=False DEFAULT=None
+  severity                  TEXT            NOT_NULL=False PK=False DEFAULT=None
+  risk_score                INTEGER         NOT_NULL=False PK=False DEFAULT=0
+  status                    TEXT            NOT_NULL=False PK=False DEFAULT='OPEN'
+  assigned_analyst          TEXT            NOT_NULL=False PK=False DEFAULT=None
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+  updated_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+TABLE: notifications
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  user_id                   INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  message                   TEXT            NOT_NULL=True PK=False DEFAULT=None
+  is_read                   INTEGER         NOT_NULL=False PK=False DEFAULT=0
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+FOREIGN KEYS:
+  user_id -> users.id
+
+TABLE: playbooks
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  name                      TEXT            NOT_NULL=True PK=False DEFAULT=None
+  description               TEXT            NOT_NULL=False PK=False DEFAULT=None
+  trigger_type              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  playbook_json             TEXT            NOT_NULL=True PK=False DEFAULT=None
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+TABLE: reports
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  title                     TEXT            NOT_NULL=True PK=False DEFAULT=None
+  generated_by              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  file_path                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+TABLE: threat_intel_cache
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  ioc_value                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  ioc_type                  TEXT            NOT_NULL=True PK=False DEFAULT=None
+  risk_score                INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  sources_summary           TEXT            NOT_NULL=False PK=False DEFAULT=None
+  raw_json                  TEXT            NOT_NULL=False PK=False DEFAULT=None
+  queried_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+TABLE: timeline
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  incident_id               INTEGER         NOT_NULL=True PK=False DEFAULT=None
+  action_by                 TEXT            NOT_NULL=True PK=False DEFAULT=None
+  action_description        TEXT            NOT_NULL=True PK=False DEFAULT=None
+  timestamp                 TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+FOREIGN KEYS:
+  incident_id -> incidents.id
+
+TABLE: users
+--------------------------------------------------------------------------------
+COLUMNS:
+  id                        INTEGER         NOT_NULL=False PK=True DEFAULT=None
+  username                  TEXT            NOT_NULL=True PK=False DEFAULT=None
+  password_hash             TEXT            NOT_NULL=True PK=False DEFAULT=None
+  role                      TEXT            NOT_NULL=False PK=False DEFAULT='Analyst'
+  created_at                TIMESTAMP       NOT_NULL=False PK=False DEFAULT=CURRENT_TIMESTAMP
+
+====================================================================================================
+DATABASE: geolocation_cache.db
+====================================================================================================
+
+TABLE: geolocation_cache
+--------------------------------------------------------------------------------
+COLUMNS:
+  ip_address                TEXT            NOT_NULL=False PK=True DEFAULT=None
+  payload_json              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  retrieved_at              TEXT            NOT_NULL=True PK=False DEFAULT=None
+  expires_at                TEXT            NOT_NULL=True PK=False DEFAULT=None

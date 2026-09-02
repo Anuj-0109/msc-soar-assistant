@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAR Operations Workspace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/supervisor_demo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/operations_workspace.css') }}">
+</head>
+<body class="operations-workspace-page">
+    <header class="workspace-topbar">
+        <div class="workspace-brand">
+            <div class="workspace-brand-mark">🛡️</div>
+            <div>
+                <h1>SOAR Operations Workspace</h1>
+                <p>Intent-Based SOAR Prototype · Analyst investigation and response</p>
+            </div>
+        </div>
+        <a class="workspace-link" href="/">← Return to Main SOAR Platform</a>
+    </header>
+
+    <main class="workspace-container">
+        <section class="workspace-intro">
+            <h2>Operational investigation and response</h2>
+            <p>
+                Analyse indicators, create and manage incidents, ingest controlled IDS
+                alerts, perform approved UFW containment, validate the platform, inspect
+                evaluation results and generate reports. Every action uses the same Flask
+                services and SQLite records as the main SOAR dashboard.
+            </p>
+            <div class="workspace-sync-note">
+                <strong>Shared platform:</strong>
+                incidents and response actions created here appear in the main dashboard
+                after its normal refresh.
+            </div>
+        </section>
+
+<!-- Stage 7B: SOAR Operations Workspace -->
+        <div class="card supervisor-demo-section" id="supervisorDemoSection">
+            <div class="card-header">
+                <span class="card-title">🛡️ SOAR Operations Workspace</span>
+                <button class="btn demo-btn" onclick="refreshSupervisorDemo()">Refresh All</button>
+            </div>
+
+            <div class="demo-mode-banner">
+                <div class="demo-mode-tile">
+                    <span class="demo-mode-label">Threat Intelligence</span>
+                    <span id="demoThreatMode" class="demo-mode-value">Checking...</span>
+                </div>
+                <div class="demo-mode-tile">
+                    <span class="demo-mode-label">Playbook Containment</span>
+                    <span id="demoContainmentMode" class="demo-mode-value">Checking...</span>
+                </div>
+                <div class="demo-mode-tile">
+                    <span class="demo-mode-label">Database</span>
+                    <span id="demoDatabaseStatus" class="demo-mode-value">Checking...</span>
+                </div>
+                <div class="demo-mode-tile">
+                    <span class="demo-mode-label">Rasa / Actions</span>
+                    <span id="demoRasaStatus" class="demo-mode-value">Checking...</span>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-panel">
+                    <h3>1. IOC Analysis Workbench</h3>
+                    <span class="demo-label">Indicator type</span>
+                    <select id="demoIocType" class="demo-select">
+                        <option value="AUTO">Auto-detect</option>
+                        <option value="IP">IPv4 address</option>
+                        <option value="DOMAIN">Domain</option>
+                        <option value="HASH">MD5 / SHA-1 / SHA-256</option>
+                    </select>
+                    <span class="demo-label">Indicator value</span>
+                    <input id="demoIocValue" class="demo-input" placeholder="Enter an IP, domain, or hash">
+                    <div class="demo-presets">
+                        <button onclick="setDemoIoc('IP', '1.1.1.1')">Benign IP</button>
+                        <button onclick="setDemoIoc('DOMAIN', 'example.com')">Example domain</button>
+                        <button onclick="setDemoIoc('HASH', '275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f')">EICAR hash</button>
+                        <button onclick="setDemoIoc('IP', '203.0.113.77')">Controlled UFW IP</button>
+                    </div>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="analyseDemoIoc()">Analyse IOC</button>
+                        <button id="demoCreateIncidentButton" class="btn demo-btn demo-btn-safe" onclick="createIncidentFromDemoAnalysis()" disabled>Create Incident</button>
+                    </div>
+                    <div id="demoIocResult" class="demo-result">Select a preset or enter an IOC, then run live threat-intelligence analysis.</div>
+                </div>
+
+                <div class="demo-panel">
+                    <h3>2. Analyst Incident Workbench</h3>
+                    <span class="demo-label">Incident</span>
+                    <select id="demoIncidentSelect" class="demo-select" onchange="loadSelectedDemoIncident()">
+                        <option value="">Loading incidents...</option>
+                    </select>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="updateDemoIncidentStatus('INVESTIGATING')">Start Investigation</button>
+                        <button class="btn demo-btn" onclick="updateDemoIncidentStatus('CLOSED')">Close Incident</button>
+                        <button class="btn demo-btn" onclick="downloadDemoIncidentReport()">Incident PDF</button>
+                    </div>
+                    <span class="demo-label">Analyst comment</span>
+                    <textarea id="demoIncidentComment" class="demo-textarea" placeholder="Record the analyst decision, findings, or resolution"></textarea>
+                    <button class="btn demo-btn" onclick="addDemoIncidentComment()">Add Comment</button>
+                    <div class="demo-warning">
+                        LIVE containment creates or removes a real UFW rule. Use only a controlled IPv4 test target and review the selected incident before confirming.
+                    </div>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn demo-btn-live" onclick="liveContainSelectedIncident()">LIVE UFW Block</button>
+                        <button class="btn demo-btn demo-btn-live" onclick="liveUnblockSelectedIncident()">LIVE UFW Unblock</button>
+                    </div>
+                    <div id="demoIncidentDetails" class="demo-result">Select an incident to inspect its lifecycle, comments, timeline, and containment capability.</div>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-panel">
+                    <h3>3. Dashboard IDS Event Ingestion</h3>
+                    <p class="demo-muted">Create a controlled Suricata-style alert through the analyst interface. This demonstrates automated ingestion without contacting or attacking a real host.</p>
+                    <span class="demo-label">Source IPv4</span>
+                    <input id="demoIdsSourceIp" class="demo-input" value="198.51.100.44">
+                    <span class="demo-label">Destination IPv4</span>
+                    <input id="demoIdsDestinationIp" class="demo-input" value="192.0.2.20">
+                    <span class="demo-label">Alert signature</span>
+                    <input id="demoIdsSignature" class="demo-input" value="ET MALWARE Controlled C2 Beacon Demonstration">
+                    <span class="demo-label">Category</span>
+                    <input id="demoIdsCategory" class="demo-input" value="A Network Trojan was detected">
+                    <span class="demo-label">IDS severity</span>
+                    <select id="demoIdsSeverity" class="demo-select">
+                        <option value="1">1 — Critical</option>
+                        <option value="2">2 — High</option>
+                        <option value="3">3 — Medium</option>
+                    </select>
+                    <button class="btn demo-btn" onclick="ingestDemoIdsAlert()">Ingest Controlled Alert</button>
+                    <div id="demoIdsResult" class="demo-result">No IDS event has been ingested.</div>
+                </div>
+
+                <div class="demo-panel">
+                    <h3>4. Live UFW Verification</h3>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="refreshDemoUfwRules()">Refresh UFW Rules</button>
+                    </div>
+                    <pre id="demoUfwOutput" class="demo-ufw-output">Loading UFW status...</pre>
+                </div>
+
+                <div class="demo-panel">
+                    <h3>5. Reports</h3>
+                    <p class="demo-muted">Generate evidence directly through the browser. Reports are created from current SQLite records.</p>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="window.location='/api/demo/reports/audit'">Audit PDF</button>
+                        <button class="btn demo-btn" onclick="window.location='/api/demo/reports/executive'">Executive PDF</button>
+                        <button class="btn demo-btn" onclick="downloadDemoIncidentReport()">Selected Incident PDF</button>
+                    </div>
+                    <div id="demoReportStatus" class="demo-result">Select an incident for an incident-specific report, or download the audit/executive report.</div>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-panel">
+                    <h3>6. System Validation</h3>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="runSupervisorValidation()">Run Validation</button>
+                    </div>
+                    <div id="demoValidationSummary" class="demo-result">Validation has not been run.</div>
+                    <div id="demoValidationChecks" class="demo-check-grid"></div>
+                </div>
+
+                <div class="demo-panel">
+                    <h3>7. Model and System Evaluation</h3>
+                    <div class="demo-actions">
+                        <button class="btn demo-btn" onclick="loadSupervisorEvaluation()">Refresh Evaluation</button>
+                        <button class="btn demo-btn" onclick="showDemoEvaluationImage('confusion')">Confusion Matrix</button>
+                        <button class="btn demo-btn" onclick="showDemoEvaluationImage('histogram')">Confidence Histogram</button>
+                        <button class="btn demo-btn" onclick="window.open('/api/demo/evaluation/artifact/report', '_blank')">JSON Report</button>
+                        <button class="btn demo-btn" onclick="window.open('/api/demo/evaluation/artifact/errors', '_blank')">Error Examples</button>
+                    </div>
+                    <div id="demoEvaluationSummary" class="demo-result">Loading saved evaluation results...</div>
+                    <div id="demoEvaluationMetrics" class="demo-metric-grid"></div>
+                    <img id="demoEvaluationImage" class="demo-artifact-preview" alt="Saved Rasa evaluation artefact">
+                </div>
+            </div>
+        </div>
+
+        <footer class="workspace-footer">
+            Intent-Based SOAR Prototype · Dedicated analyst operations interface
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/supervisor_demo.js') }}"></script>
+</body>
+</html>

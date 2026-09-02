@@ -1,0 +1,18 @@
+version: "3.1"
+
+stories:
+
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: threat analaysis path
+  steps:
+  - intent: analyze_threat
+  - action: action_analyze_threat
+
+- story: threat blocking path
+  steps:
+  - intent: block_threat
+  - action: action_block_threat

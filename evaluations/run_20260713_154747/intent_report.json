@@ -1,0 +1,57 @@
+{
+  "generate_report": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.9090909090909091,
+    "support": 6,
+    "confused_with": {
+      "block_threat": 1
+    }
+  },
+  "block_threat": {
+    "precision": 0.6428571428571429,
+    "recall": 0.6923076923076923,
+    "f1-score": 0.6666666666666666,
+    "support": 13,
+    "confused_with": {
+      "analyze_threat": 4
+    }
+  },
+  "greet": {
+    "precision": 1.0,
+    "recall": 0.6,
+    "f1-score": 0.7499999999999999,
+    "support": 5,
+    "confused_with": {
+      "analyze_threat": 2
+    }
+  },
+  "analyze_threat": {
+    "precision": 0.625,
+    "recall": 0.7142857142857143,
+    "f1-score": 0.6666666666666666,
+    "support": 14,
+    "confused_with": {
+      "block_threat": 4
+    }
+  },
+  "accuracy": 0.7105263157894737,
+  "macro avg": {
+    "precision": 0.8169642857142857,
+    "recall": 0.709981684981685,
+    "f1-score": 0.7481060606060606,
+    "support": 38
+  },
+  "weighted avg": {
+    "precision": 0.7396616541353384,
+    "recall": 0.7105263157894737,
+    "f1-score": 0.7159090909090908,
+    "support": 38
+  },
+  "micro avg": {
+    "precision": 0.7105263157894737,
+    "recall": 0.7105263157894737,
+    "f1-score": 0.7105263157894737,
+    "support": 38
+  }
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "text": "can you check this IP address?",
+    "intent": "analyze_threat",
+    "intent_prediction": {
+      "name": "block_threat",
+      "confidence": 0.7768256664276123
+    }
+  },
+  {
+    "text": "blacklist hash 8f4e3c2b1a0f9e8d7c6b5a4f3e2d1c0b",
+    "intent": "block_threat",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.9999978542327881
+    }
+  },
+  {
+    "text": "please look up this indicator of compromise",
+    "intent": "analyze_threat",
+    "intent_prediction": {
+      "name": "block_threat",
+      "confidence": 0.9999183416366577
+    }
+  },
+  {
+    "text": "analyze hash 8f4e3c2b1a0f9e8d7c6b5a4f3e2d1c0b",
+    "intent": "analyze_threat",
+    "intent_prediction": {
+      "name": "block_threat",
+      "confidence": 0.9999958276748657
+    }
+  },
+  {
+    "text": "drop traffic from this IP address",
+    "intent": "block_threat",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.9999951124191284
+    }
+  },
+  {
+    "text": "download the remediation summary",
+    "intent": "generate_report",
+    "intent_prediction": {
+      "name": "block_threat",
+      "confidence": 0.9999771118164062
+    }
+  },
+  {
+    "text": "status check",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.9999995231628418
+    }
+  },
+  {
+    "text": "block ip 8.8.8.8",
+    "intent": "block_threat",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.9289911389350891
+    }
+  },
+  {
+    "text": "restrict communication with IP 172.16.254.1",
+    "intent": "block_threat",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.9996403455734253
+    }
+  },
+  {
+    "text": "good morning",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "analyze_threat",
+      "confidence": 0.7677779793739319
+    }
+  },
+  {
+    "text": "check IP 10.0.0.15",
+    "intent": "analyze_threat",
+    "intent_prediction": {
+      "name": "block_threat",
+      "confidence": 0.999681830406189
+    }
+  }
+]

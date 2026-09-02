@@ -1,0 +1,171 @@
+.
+├── actions
+│   ├── actions.py
+│   ├── __init__.py
+│   └── __pycache__
+│       ├── actions.cpython-310.pyc
+│       └── __init__.cpython-310.pyc
+├── app.py
+├── audit_logger.py
+├── blocklist.txt
+├── blueprints
+│   ├── analytics.py
+│   ├── auth.py
+│   ├── chat.py
+│   ├── incidents.py
+│   ├── ingestion.py
+│   ├── playbooks.py
+│   └── __pycache__
+│       ├── analytics.cpython-310.pyc
+│       ├── auth.cpython-310.pyc
+│       ├── chat.cpython-310.pyc
+│       ├── incidents.cpython-310.pyc
+│       ├── ingestion.cpython-310.pyc
+│       └── playbooks.cpython-310.pyc
+├── config.yml
+├── credentials.yml
+├── data
+│   ├── nlu.yml
+│   ├── rules.yml
+│   └── stories.yml
+├── domain.yml
+├── endpoints.yml
+├── evaluate.sh
+├── evaluations
+│   └── run_20260713_154747
+│       ├── DIETClassifier_confusion_matrix.png
+│       ├── DIETClassifier_errors.json
+│       ├── DIETClassifier_histogram.png
+│       ├── DIETClassifier_report.json
+│       ├── intent_confusion_matrix.png
+│       ├── intent_errors.json
+│       ├── intent_histogram.png
+│       └── intent_report.json
+├── incident_report.pdf
+├── models
+│   ├── 20260705-160231-smoggy-chives.tar.gz
+│   ├── 20260708-170139-silent-granite.tar.gz
+│   ├── 20260709-124417-recursive-salt.tar.gz
+│   ├── 20260709-133341-ternary-stool.tar.gz
+│   ├── 20260710-150910-cold-snowboard.tar.gz
+│   ├── 20260710-155112-commutative-net.tar.gz
+│   ├── 20260710-163529-flat-infantry.tar.gz
+│   ├── 20260711-160355-brownian-block.tar.gz
+│   ├── 20260713-141605-sophisticated-cedar.tar.gz
+│   ├── 20260714-155747-forward-module.tar.gz
+│   ├── 20260717-155802-approximate-iceberg.tar.gz
+│   ├── 20260721-160752-old-chives.tar.gz
+│   ├── 20260724-123005-furious-banner.tar.gz
+│   ├── 20260724-133652-crimson-module.tar.gz
+│   ├── database.py
+│   └── __pycache__
+│       └── database.cpython-310.pyc
+├── project_structure.txt
+├── __pycache__
+│   ├── app.cpython-310.pyc
+│   ├── app.cpython-314.pyc
+│   ├── audit_logger.cpython-310.pyc
+│   └── soar_engine.cpython-310.pyc
+├── reports
+│   ├── incident_report_20260713_151327.txt
+│   ├── incident_report_20260713_151350.txt
+│   ├── incident_report_20260713_154721.txt
+│   ├── incident_report_20260721_154228.txt
+│   ├── incident_report_20260721_170325.txt
+│   ├── incident_report_20260723_131420.txt
+│   └── incident_report_20260723_151346.txt
+├── results
+│   ├── DIETClassifier_confusion_matrix.png
+│   ├── DIETClassifier_errors.json
+│   ├── DIETClassifier_histogram.png
+│   ├── DIETClassifier_report.json
+│   ├── intent_confusion_matrix.png
+│   ├── intent_errors.json
+│   ├── intent_histogram.png
+│   └── intent_report.json
+├── sample_auth.log
+├── services
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   └── threat_intel.cpython-310.pyc
+│   └── threat_intel.py
+├── soar_audit.db
+├── soar.db
+├── soar_engine.py
+├── soar_platform.db
+├── templates
+│   └── index.html
+├── tests
+│   └── test_stories.yml
+├── threat_sample.log
+└── venv
+    ├── bin
+    │   ├── activate
+    │   ├── activate.csh
+    │   ├── activate.fish
+    │   ├── Activate.ps1
+    │   ├── coloredlogs
+    │   ├── dask
+    │   ├── doesitcache
+    │   ├── estimator_ckpt_converter
+    │   ├── f2py
+    │   ├── f2py3
+    │   ├── f2py3.10
+    │   ├── flask
+    │   ├── fonttools
+    │   ├── futurize
+    │   ├── google-oauthlib-tool
+    │   ├── hf
+    │   ├── httpx
+    │   ├── huggingface-cli
+    │   ├── humanfriendly
+    │   ├── idna
+    │   ├── import_pb_to_tensorboard
+    │   ├── jp.py
+    │   ├── jsonschema
+    │   ├── make_image_classifier
+    │   ├── make_nearest_neighbour_index
+    │   ├── markdown_py
+    │   ├── normalizer
+    │   ├── pasteurize
+    │   ├── pip
+    │   ├── pip3
+    │   ├── pip3.10
+    │   ├── pybabel
+    │   ├── pyftmerge
+    │   ├── pyftsubset
+    │   ├── pykwalify
+    │   ├── python -> python3.10
+    │   ├── python3 -> python3.10
+    │   ├── python3.10 -> /usr/bin/python3.10
+    │   ├── randomname
+    │   ├── rasa
+    │   ├── sanic
+    │   ├── saved_model_cli
+    │   ├── skops
+    │   ├── tabulate
+    │   ├── tensorboard
+    │   ├── tflite_convert
+    │   ├── tf_upgrade_v2
+    │   ├── tiny-agents
+    │   ├── toco
+    │   ├── toco_from_protos
+    │   ├── tqdm
+    │   ├── ttx
+    │   └── wheel
+    ├── include
+    │   └── site
+    │       └── python3.10
+    ├── lib
+    │   └── python3.10
+    │       └── site-packages
+    ├── lib64 -> lib
+    ├── pyvenv.cfg
+    └── share
+        ├── doc
+        │   └── networkx-2.6.3
+        └── man
+            └── man1
+
+31 directories, 138 files

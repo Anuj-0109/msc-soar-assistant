@@ -1,0 +1,47 @@
+version: "3.1"
+
+rules:
+  - rule: Greet the analyst
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Analyse an IOC
+    steps:
+      - intent: analyze_threat
+      - action: action_analyze_threat
+
+  - rule: Check IP reputation
+    steps:
+      - intent: check_ip_reputation
+      - action: action_query_threat_intel
+
+  - rule: Analyse an uploaded log
+    steps:
+      - intent: analyze_log_file
+      - action: action_parse_and_analyze_log
+
+  - rule: Execute approved firewall containment
+    steps:
+      - intent: approve_block_ip
+      - action: action_enforce_firewall_rule
+
+  - rule: Execute explicit threat blocking
+    steps:
+      - intent: block_threat
+      - action: action_block_threat
+
+  - rule: Remove containment
+    steps:
+      - intent: unblock_threat
+      - action: action_unblock_threat
+
+  - rule: Generate incident report
+    steps:
+      - intent: generate_report
+      - action: action_generate_report
+
+  - rule: Show latest report
+    steps:
+      - intent: show_latest_report
+      - action: action_show_latest_report

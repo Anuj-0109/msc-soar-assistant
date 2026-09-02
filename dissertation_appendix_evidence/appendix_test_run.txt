@@ -1,0 +1,41 @@
+test_chat_format_contains_network_context (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_chat_target_extracts_ip_and_domain (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_hash_does_not_request_geolocation (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_public_ip_is_normalised (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_report_button_uses_structured_report (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_reserved_ip_is_not_sent_external (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_routes_and_report_sections_exist (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_workspace_has_no_separate_geolocation_box (test_geolocation_reporting.ChatReportGeolocationTests) ... ok
+test_benign_log (test_log_ingestion.LogAnalysisTests) ... ok
+test_rejects_executable_extension (test_log_ingestion.LogAnalysisTests) ... ok
+test_repeated_authentication_failures (test_log_ingestion.LogAnalysisTests) ... ok
+test_suricata_critical_alert (test_log_ingestion.LogAnalysisTests) ... ok
+test_upload_endpoint (test_log_ingestion.LogAnalysisTests) ... ok
+test_main_dashboard_links_to_workspace (test_operations_workspace.OperationsWorkspaceTests) ... ok
+test_workspace_and_main_platform_share_demo_apis (test_operations_workspace.OperationsWorkspaceTests) ... ok
+test_workspace_contains_operational_interface (test_operations_workspace.OperationsWorkspaceTests) ... ok
+test_workspace_route_is_registered (test_operations_workspace.OperationsWorkspaceTests) ... ok
+test_dashboard_contains_playbook_interface (test_playbook_dashboard.PlaybookDashboardTests) ... ok
+test_playbook_assets_exist (test_playbook_dashboard.PlaybookDashboardTests) ... ok
+test_required_playbook_routes_exist (test_playbook_dashboard.PlaybookDashboardTests) ... ok
+test_allowlisted_ip_is_not_blocked (test_rasa_actions.RasaActionTests) ... ok
+test_ip_address_slot_uses_central_intel (test_rasa_actions.RasaActionTests) ... ok
+test_log_analysis_action (test_rasa_actions.RasaActionTests) ... ok
+test_log_path_traversal_is_rejected (test_rasa_actions.RasaActionTests) ... ok
+test_dashboard_contains_stage7_interface (test_supervisor_demo.SupervisorDemoTests) ... ok
+test_evaluation_endpoint_is_safe (test_supervisor_demo.SupervisorDemoTests) ... ok
+test_invalid_ioc_is_rejected (test_supervisor_demo.SupervisorDemoTests) ... ok
+test_required_stage7_routes_exist (test_supervisor_demo.SupervisorDemoTests) ... ok
+test_valid_ioc_analysis (test_supervisor_demo.SupervisorDemoTests) ... ok
+test_hash_is_not_sent_to_abuseipdb (test_threat_intel_service.ThreatIntelServiceTests) ... ok
+test_invalid_ip_is_rejected (test_threat_intel_service.ThreatIntelServiceTests) ... ok
+test_simulation_disabled_never_generates_fake_data (test_threat_intel_service.ThreatIntelServiceTests) ... ok
+test_simulation_is_labelled_and_deterministic (test_threat_intel_service.ThreatIntelServiceTests) ... ok
+test_backend_errors_are_shown_inline (test_ufw_workspace_ui.UfwWorkspaceUiTests) ... ok
+test_confirmation_styles_exist (test_ufw_workspace_ui.UfwWorkspaceUiTests) ... ok
+test_native_confirmation_is_not_used (test_ufw_workspace_ui.UfwWorkspaceUiTests) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.331s
+
+OK

@@ -1,0 +1,50 @@
+[
+  {
+    "text": "inspect this suspicious domain unsafe-traffic.org",
+    "entities": [
+      {
+        "start": 31,
+        "end": 49,
+        "value": "unsafe-traffic.org",
+        "entity": "domain"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "search threat intel for suspicious-link.net",
+    "entities": [
+      {
+        "start": 24,
+        "end": 43,
+        "value": "suspicious-link.net",
+        "entity": "domain"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "completely block domain dangerous-web.biz",
+    "entities": [
+      {
+        "start": 24,
+        "end": 41,
+        "value": "dangerous-web.biz",
+        "entity": "domain"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "block domain bad-actor.ru",
+    "entities": [
+      {
+        "start": 13,
+        "end": 25,
+        "value": "bad-actor.ru",
+        "entity": "domain"
+      }
+    ],
+    "predicted_entities": []
+  }
+]
